@@ -1,0 +1,485 @@
+/* Buttons, inputs, menus, dialogs, file browser, command palette, notifications. */
+
+/* ---- Buttons ---- */
+button.jp-mod-styled,
+.jp-Button,
+.jp-Dialog-button {
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  border-radius: var(--clean-radius-control);
+  box-shadow: none;
+  line-height: 1;
+}
+
+button.jp-mod-styled {
+  padding: 7px 12px;
+  color: var(--jp-ui-font-color1);
+  background: var(--jp-layout-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color0);
+}
+
+button.jp-mod-styled:hover {
+  background: var(--clean-surface);
+}
+
+button.jp-mod-styled.jp-mod-accept,
+button.jp-mod-styled.jp-mod-accept:hover,
+button.jp-mod-styled.jp-mod-accept:active {
+  border: var(--jp-border-width) solid transparent;
+  color: var(--clean-on-accept);
+}
+
+button.jp-mod-styled.jp-mod-reject {
+  background: transparent;
+  color: var(--jp-ui-font-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color0);
+}
+
+button.jp-mod-styled.jp-mod-reject:hover {
+  background: var(--clean-surface);
+}
+
+button.jp-mod-styled.jp-mod-reject:active {
+  background: var(--clean-surface-2);
+}
+
+button.jp-mod-styled.jp-mod-warn {
+  color: var(--clean-on-accept);
+  border: var(--jp-border-width) solid transparent;
+}
+
+button.jp-mod-styled.jp-mod-accept:active,
+button.jp-mod-styled:active {
+  transform: scale(0.98);
+}
+
+.jp-Dialog-button.jp-mod-styled:not(:last-child) {
+  margin-right: 8px;
+}
+
+/*
+ * File browser "+" (new launcher). Core paints it as a solid primary button;
+ * here it is a flat grey chip, slightly wider than its icon neighbours and
+ * shorter than the toolbar row, so it reads as the first action without
+ * shouting.
+ */
+.jp-FileBrowser-toolbar
+  .jp-ToolbarButtonComponent[data-command='launcher:create'] {
+  width: 40px;
+  height: 22px;
+  min-height: 22px;
+  border-radius: var(--clean-radius-control);
+  background: var(--clean-surface-2);
+}
+
+.jp-FileBrowser-toolbar
+  .jp-ToolbarButtonComponent[data-command='launcher:create']:hover,
+.jp-FileBrowser-toolbar
+  .jp-ToolbarButtonComponent[data-command='launcher:create']:focus-visible {
+  background: var(--clean-border);
+}
+
+.jp-FileBrowser-toolbar
+  .jp-ToolbarButtonComponent[data-command='launcher:create']
+  .jp-icon3[fill] {
+  fill: var(--jp-ui-font-color2);
+}
+
+.jp-FileBrowser-toolbar
+  .jp-ToolbarButtonComponent[data-command='launcher:create']:hover
+  .jp-icon3[fill] {
+  fill: var(--jp-ui-font-color1);
+}
+
+/* ---- Text inputs ---- */
+input.jp-mod-styled,
+.jp-InputGroup input,
+.jp-ThemedContainer input[type='text'],
+.jp-ThemedContainer input[type='search'],
+.jp-ThemedContainer input[type='number'],
+.jp-ThemedContainer textarea {
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--jp-ui-font-color1);
+  background: var(--jp-input-background);
+  border: var(--jp-border-width) solid var(--jp-input-border-color);
+  border-radius: var(--clean-radius-control);
+  box-shadow: none;
+  padding: 5px 8px;
+}
+
+input.jp-mod-styled:focus,
+.jp-InputGroup input:focus,
+.jp-ThemedContainer input[type='text']:focus,
+.jp-ThemedContainer input[type='search']:focus,
+.jp-ThemedContainer textarea:focus {
+  border-color: var(--jp-input-active-border-color);
+  box-shadow: none;
+  outline: none;
+}
+
+.jp-InputGroup input {
+  box-shadow: none;
+  border: var(--jp-border-width) solid var(--jp-input-border-color);
+}
+
+.jp-InputGroup input:focus {
+  box-shadow: none;
+  border-color: var(--jp-input-active-border-color);
+}
+
+/* Selects */
+.jp-HTMLSelect.jp-DefaultStyle select,
+select.jp-mod-styled {
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--jp-ui-font-color1);
+  border-radius: var(--clean-radius-control);
+}
+
+.jp-HTMLSelect.jp-DefaultStyle select:hover {
+  background-color: var(--clean-surface);
+  color: var(--jp-ui-font-color1);
+}
+
+/* Switches / checkboxes keep their colours from variables */
+
+/* ---- Menus (menu bar dropdowns and context menus) ---- */
+.lm-Menu {
+  background: var(--jp-layout-color1);
+  color: var(--jp-ui-font-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-card);
+  box-shadow: var(--clean-shadow-float);
+  padding: 4px 0;
+  font-size: var(--jp-ui-font-size1);
+}
+
+.lm-MenuBar-menu.jp-ThemedContainer {
+  top: 2px;
+}
+
+.lm-Menu-item {
+  min-height: var(--jp-private-menu-item-height);
+  max-height: var(--jp-private-menu-item-height);
+  line-height: var(--jp-private-menu-item-height);
+}
+
+.lm-Menu-item.lm-mod-active {
+  background: var(--clean-surface);
+  color: var(--jp-ui-font-color0);
+}
+
+.lm-Menu-itemLabel {
+  padding: 0 24px 0 4px;
+}
+
+.lm-Menu-itemShortcut {
+  color: var(--jp-ui-font-color3);
+  font-size: 12px;
+  padding-right: 4px;
+}
+
+.lm-Menu-itemIcon {
+  padding-left: 10px;
+}
+
+.lm-Menu-item[data-type='separator'] > div::after {
+  border-top: var(--jp-border-width) solid var(--jp-border-color1);
+  mix-blend-mode: normal;
+}
+
+.lm-Menu-item.lm-mod-disabled {
+  color: var(--jp-ui-font-color3);
+}
+
+/* ---- Dialogs ---- */
+.jp-Dialog {
+  background: var(--jp-dialog-background);
+}
+
+.jp-Dialog-content {
+  background: var(--jp-layout-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: 8px;
+  box-shadow: var(--clean-shadow-float);
+  padding: 24px 24px 16px;
+}
+
+.jp-Dialog-header {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--jp-ui-font-color0);
+  padding-bottom: 8px;
+}
+
+.jp-Dialog-body {
+  color: var(--jp-ui-font-color2);
+  line-height: 1.5;
+}
+
+.jp-Dialog-footer {
+  padding: 12px 12px 0;
+}
+
+/* ---- Command palette ---- */
+.lm-CommandPalette,
+.jp-ModalCommandPalette .lm-CommandPalette {
+  background: var(--jp-layout-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-card);
+  box-shadow: var(--clean-shadow-float);
+}
+
+.lm-CommandPalette-search {
+  padding: 8px;
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+}
+
+.lm-CommandPalette-wrapper {
+  border: var(--jp-border-width) solid var(--jp-input-border-color);
+  border-radius: var(--clean-radius-control);
+  box-shadow: none;
+  padding: 2px 8px;
+}
+
+.lm-CommandPalette-wrapper.lm-mod-focused {
+  border-color: var(--jp-input-active-border-color);
+  box-shadow: none;
+}
+
+.lm-CommandPalette-header {
+  background: transparent;
+  color: var(--jp-ui-font-color2);
+  font-size: var(--clean-label-size);
+  letter-spacing: var(--clean-label-tracking);
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  padding: 6px 10px;
+}
+
+.lm-CommandPalette-item {
+  padding: 0 10px;
+  min-height: 28px;
+  line-height: 28px;
+}
+
+.lm-CommandPalette-item.lm-mod-active {
+  background: var(--clean-surface);
+  color: var(--jp-ui-font-color1);
+}
+
+.lm-CommandPalette-item.lm-mod-active .jp-icon-selectable[fill] {
+  fill: var(--jp-ui-font-color1);
+}
+
+.lm-CommandPalette-itemShortcut {
+  color: var(--jp-ui-font-color3);
+}
+
+/* ---- File browser ---- */
+.jp-FileBrowser {
+  background: var(--jp-layout-color1);
+}
+
+/*
+ * File browser toolbar: one 34px band that lines up with the main tab bar
+ * (same top, same centre line). 1px top padding + 33px content = 34px puts
+ * the icon centre on the tab centre (the tabs start 1px below the bar).
+ */
+.jp-FileBrowser-toolbar.jp-Toolbar {
+  box-sizing: border-box;
+  height: auto;
+  min-height: 34px;
+  margin: 0;
+  padding: 1px 8px 0;
+  border-bottom: none;
+  border-radius: 0; /* the toolbar component rounds its corners by default */
+  box-shadow: none;
+}
+
+.jp-FileBrowser-toolbar.jp-Toolbar::part(positioning-region) {
+  min-height: 33px;
+  align-items: center;
+  gap: 0 4px;
+}
+
+.jp-FileBrowser-toolbar > .jp-Toolbar-item {
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.jp-FileBrowser-toolbar > .jp-Toolbar-item .jp-ToolbarButtonComponent {
+  margin: 0;
+  padding: 0;
+}
+
+.jp-BreadCrumbs {
+  margin: 6px 8px 4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  color: var(--jp-ui-font-color2);
+  border-radius: var(--clean-radius-control);
+}
+
+.jp-BreadCrumbs-item {
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-BreadCrumbs-item:hover {
+  background: var(--clean-surface);
+}
+
+.jp-DirListing-header {
+  border-top: var(--jp-border-width) solid var(--jp-border-color1);
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  background: var(--jp-layout-color1);
+}
+
+.jp-DirListing-headerItem {
+  padding: 6px 12px 5px;
+  font-size: var(--clean-label-size);
+  letter-spacing: var(--clean-label-tracking);
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-DirListing-headerItem:hover {
+  background: var(--clean-surface);
+}
+
+.jp-DirListing-headerItem.jp-mod-selected {
+  font-weight: 700;
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-DirListing-content {
+  padding: 4px 0;
+}
+
+.jp-DirListing-item {
+  padding: 5px 12px;
+  font-size: var(--jp-ui-font-size1);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-DirListing-item:hover:not(.jp-mod-selected) {
+  background: var(--clean-surface);
+}
+
+.jp-DirListing-item.jp-mod-selected {
+  background: var(--clean-surface-2);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-DirListing-item.jp-mod-selected .jp-icon-selectable[fill],
+.jp-DirListing-item.jp-mod-selected .jp-icon3[fill] {
+  fill: var(--jp-ui-font-color1);
+}
+
+.jp-DirListing-content .jp-DirListing-item.jp-mod-selected mark {
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-DirListing-item.jp-mod-dropTarget {
+  background: var(--clean-accent-subtle);
+}
+
+.jp-DirListing-itemModified,
+.jp-DirListing-itemFileSize {
+  color: var(--jp-ui-font-color3);
+  font-size: 12px;
+}
+
+.jp-DirListing-item.jp-mod-selected .jp-DirListing-itemModified,
+.jp-DirListing-item.jp-mod-selected .jp-DirListing-itemFileSize {
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-DirListing-itemIcon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.jp-DirListing-checkboxWrapper,
+.jp-DirListing-headerItem .jp-DirListing-checkboxWrapper {
+  accent-color: var(--clean-accent);
+}
+
+.jp-DirListing-editor {
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  border: var(--jp-border-width) solid var(--jp-input-active-border-color);
+  border-radius: 3px;
+}
+
+/* Running sessions, TOC, extension manager panels */
+.jp-RunningSessions-item,
+.jp-TableOfContents-content li {
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-TableOfContents-content
+  .jp-tocItem.jp-tocItem-active
+  > .jp-tocItem-heading {
+  background: var(--clean-surface);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-TableOfContents-content .jp-tocItem-heading:hover {
+  background: var(--clean-surface);
+}
+
+/* ---- Notifications ---- */
+.jp-toastContainer .Toastify__toast,
+.jp-Notification-List {
+  background: var(--jp-layout-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-card);
+  box-shadow: var(--clean-shadow-float);
+  color: var(--jp-ui-font-color1);
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-toastContainer .jp-toast-button {
+  border-radius: var(--clean-radius-control);
+  font-family: var(--jp-ui-font-family);
+}
+
+/* ---- Settings editor forms ---- */
+.jp-SettingsForm fieldset,
+.jp-FormGroup-content fieldset {
+  border: none;
+}
+
+.jp-SettingsEditor .jp-PluginList {
+  background: var(--jp-layout-color1);
+  border-right: var(--jp-border-width) solid var(--jp-border-color1);
+}
+
+.jp-PluginList-entry.jp-mod-selected {
+  background: var(--clean-surface-2);
+  color: var(--jp-ui-font-color1);
+}
+
+/* ---- Search box in documents ---- */
+.jp-DocumentSearch-overlay {
+  background: var(--jp-layout-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: 0 0 var(--clean-radius-card) var(--clean-radius-card);
+  box-shadow: var(--clean-shadow-float);
+}
+
+.jp-DocumentSearch-input-wrapper {
+  border: var(--jp-border-width) solid var(--jp-input-border-color);
+  border-radius: var(--clean-radius-control);
+}
+
+.jp-DocumentSearch-input-wrapper:focus-within {
+  border-color: var(--jp-input-active-border-color);
+  box-shadow: none;
+}

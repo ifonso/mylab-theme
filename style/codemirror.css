@@ -1,0 +1,172 @@
+/* CodeMirror 6: quiet gutters, no active-line tint, flat bracket match, tooltips. */
+
+.jp-Notebook .cm-editor,
+.jp-CodeMirrorEditor .cm-editor {
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  line-height: var(--jp-code-line-height);
+  background: transparent;
+
+  /* JetBrains IDEs ship with ligatures off; keep "->", "!=", "==" literal */
+  font-variant-ligatures: none;
+}
+
+.jp-Notebook .jp-InputArea-editor .cm-editor {
+  border-radius: var(--clean-radius-cell);
+}
+
+.jp-Notebook .jp-InputArea-editor .cm-scroller {
+  border-radius: var(--clean-radius-cell);
+}
+
+.jp-Notebook .jp-InputArea-editor .cm-content {
+  padding: var(--clean-code-pad-y) 0;
+}
+
+.jp-Notebook .jp-InputArea-editor .cm-line {
+  padding: 0 var(--clean-cell-inset);
+}
+
+.jp-Notebook .jp-InputArea-editor .cm-editor pre {
+  padding: 0 var(--clean-cell-inset);
+}
+
+.jp-ThemedContainer .cm-editor .cm-gutters {
+  background: transparent;
+  border-right: none;
+  color: var(--jp-ui-font-color3);
+}
+
+.jp-ThemedContainer .cm-editor .cm-lineNumbers .cm-gutterElement {
+  padding: 0 4px 0 var(--clean-cell-inset);
+  min-width: 2.4em;
+  font-size: 12px;
+}
+
+.jp-Notebook .jp-InputArea-editor .cm-lineNumbers ~ .cm-content .cm-line,
+.jp-Notebook .jp-InputArea-editor .cm-gutters + .cm-content .cm-line {
+  padding-left: 6px;
+}
+
+.jp-ThemedContainer .cm-editor .cm-activeLine,
+.jp-ThemedContainer .cm-editor .cm-activeLineGutter {
+  background: transparent;
+}
+
+.jp-ThemedContainer .cm-editor .cm-activeLineGutter {
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-ThemedContainer .cm-editor .cm-cursor,
+.jp-ThemedContainer .cm-editor .cm-dropCursor {
+  border-left: var(--jp-code-cursor-width0) solid var(--jp-editor-cursor-color);
+}
+
+.jp-ThemedContainer .cm-editor .cm-selectionBackground,
+.jp-ThemedContainer
+  .cm-editor.cm-focused
+  > .cm-scroller
+  > .cm-selectionLayer
+  .cm-selectionBackground {
+  background: var(--jp-editor-selected-focused-background);
+}
+
+.jp-ThemedContainer .cm-editor .cm-matchingBracket,
+.jp-ThemedContainer .cm-editor.cm-focused .cm-matchingBracket {
+  background: var(--clean-accent-subtle);
+  outline: none;
+  border-radius: 2px;
+}
+
+.jp-ThemedContainer .cm-editor .cm-nonmatchingBracket {
+  background: var(--clean-error-subtle);
+  outline: none;
+}
+
+.jp-ThemedContainer .cm-editor .cm-searchMatch {
+  background: var(--jp-search-unselected-match-background-color);
+}
+
+.jp-ThemedContainer .cm-editor .cm-searchMatch.cm-searchMatch-selected {
+  background: var(--jp-search-selected-match-background-color);
+}
+
+/* Syntax: keywords regular weight (the colour carries the meaning) */
+.jp-ThemedContainer .cm-keyword,
+.jp-ThemedContainer .cm-builtin,
+.jp-ThemedContainer .cm-atom,
+.jp-ThemedContainer .cm-meta,
+.jp-ThemedContainer .cm-def,
+.jp-ThemedContainer .cm-header,
+.jp-ThemedContainer .cm-strong {
+  font-weight: 400;
+}
+
+.jp-ThemedContainer .cm-header,
+.jp-ThemedContainer .cm-strong {
+  font-weight: 700;
+}
+
+.jp-ThemedContainer .cm-comment {
+  font-style: italic;
+}
+
+/*
+ * IPython magics, marked by src/syntax.ts (the operator variable cannot
+ * reach them): pink, regular weight. A `%` that the parser took for modulo
+ * would otherwise be bold. The descendant selector wins when CodeMirror
+ * nests the highlight span inside.
+ */
+.jp-ThemedContainer .cm-editor .cm-clean-magic,
+.jp-ThemedContainer .cm-editor .cm-clean-magic * {
+  color: var(--clean-syntax-pink);
+  font-weight: 400;
+}
+
+/* Tooltips, hover and autocomplete */
+.jp-ThemedContainer .cm-tooltip,
+.cm-tooltip.jp-ThemedContainer,
+.jp-Completer,
+.jp-Tooltip {
+  background: var(--jp-layout-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-popup);
+  box-shadow: var(--clean-shadow-float);
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-Completer .jp-Completer-item {
+  padding: 2px 8px;
+  min-height: 24px;
+}
+
+.jp-Completer .jp-Completer-item.jp-mod-active {
+  background: var(--clean-surface);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-Completer .jp-Completer-match {
+  font-weight: 700;
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-Completer .jp-Completer-type,
+.jp-Completer .jp-Completer-typeExtended {
+  color: var(--jp-ui-font-color3);
+  font-size: 12px;
+}
+
+.jp-Completer .jp-Completer-monogram {
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+.jp-Tooltip .jp-Tooltip-content {
+  padding: 8px 10px;
+}
+
+/* Text editor (file editor) shares the editor look without the frame */
+.jp-FileEditor .cm-editor {
+  padding: 8px 0;
+}

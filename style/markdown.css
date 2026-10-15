@@ -1,0 +1,175 @@
+/* Rendered markdown and HTML content. Lato, 15px, generous line-height. */
+
+.jp-RenderedHTMLCommon {
+  font-family: var(--jp-content-font-family);
+  font-size: var(--jp-content-font-size1);
+  line-height: var(--jp-content-line-height);
+  color: var(--jp-content-font-color1);
+  padding-right: 0;
+}
+
+.jp-RenderedHTMLCommon p {
+  margin: 0.8em 0;
+}
+
+.jp-RenderedHTMLCommon > *:first-child {
+  margin-top: 0.2em;
+}
+
+.jp-RenderedHTMLCommon > *:last-child {
+  margin-bottom: 0.2em;
+}
+
+/* Headings */
+.jp-RenderedHTMLCommon h1,
+.jp-RenderedHTMLCommon h2,
+.jp-RenderedHTMLCommon h3,
+.jp-RenderedHTMLCommon h4,
+.jp-RenderedHTMLCommon h5,
+.jp-RenderedHTMLCommon h6 {
+  font-family: var(--jp-content-font-family);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--jp-content-font-color0);
+}
+
+.jp-RenderedHTMLCommon h1 {
+  font-size: 1.9em;
+  letter-spacing: -0.02em;
+}
+
+.jp-RenderedHTMLCommon h2 {
+  font-size: 1.5em;
+}
+
+.jp-RenderedHTMLCommon h3 {
+  font-size: 1.2em;
+}
+
+.jp-RenderedHTMLCommon h4,
+.jp-RenderedHTMLCommon h5,
+.jp-RenderedHTMLCommon h6 {
+  font-size: 1em;
+}
+
+.jp-RenderedHTMLCommon h5,
+.jp-RenderedHTMLCommon h6 {
+  color: var(--jp-content-font-color2);
+}
+
+.jp-RenderedHTMLCommon h1:first-child,
+.jp-RenderedHTMLCommon h2:first-child,
+.jp-RenderedHTMLCommon h3:first-child {
+  margin-top: 0.3em;
+}
+
+/* Links */
+.jp-RenderedHTMLCommon a:link,
+.jp-RenderedHTMLCommon a:visited {
+  color: var(--jp-content-link-color);
+  text-decoration: underline;
+  text-decoration-color: var(--clean-accent-soft);
+  text-underline-offset: 2px;
+}
+
+.jp-RenderedHTMLCommon a:hover {
+  color: var(--clean-accent-hover);
+  text-decoration-color: currentcolor;
+}
+
+/* Lists */
+.jp-RenderedHTMLCommon ul,
+.jp-RenderedHTMLCommon ol {
+  padding-left: 1.6em;
+  margin: 0.6em 0;
+}
+
+.jp-RenderedHTMLCommon li {
+  margin: 0.25em 0;
+}
+
+.jp-RenderedHTMLCommon li::marker {
+  color: var(--jp-content-font-color3);
+}
+
+/* Inline code and code blocks (prefixed with .jp-ThemedContainer to beat core specificity) */
+.jp-ThemedContainer .jp-RenderedHTMLCommon code {
+  font-family: var(--jp-code-font-family);
+  font-size: 0.875em;
+  background: var(--clean-surface);
+  color: var(--jp-content-font-color1);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.jp-ThemedContainer .jp-RenderedHTMLCommon pre {
+  background: var(--clean-surface);
+  border-radius: var(--clean-radius-cell);
+  padding: 12px var(--clean-cell-inset);
+  margin: 0.8em 0;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.jp-ThemedContainer .jp-RenderedHTMLCommon pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+/* Keyboard keys */
+.jp-ThemedContainer .jp-RenderedHTMLCommon kbd {
+  font-family: var(--jp-code-font-family);
+  font-size: 0.8em;
+  background: var(--clean-surface);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--jp-content-font-color1);
+}
+
+/* Quotes and rules */
+.jp-RenderedHTMLCommon blockquote {
+  margin: 0.8em 0;
+  padding: 0.2em 0 0.2em 1em;
+  border-left: 2px solid var(--jp-border-color0);
+  color: var(--jp-content-font-color2);
+  background: transparent;
+}
+
+.jp-RenderedHTMLCommon blockquote p {
+  margin: 0.4em 0;
+}
+
+.jp-RenderedHTMLCommon hr {
+  border: none;
+  border-top: var(--jp-border-width) solid var(--jp-border-color1);
+  margin: 1.5em 0;
+}
+
+/* Images */
+.jp-RenderedHTMLCommon img {
+  max-width: 100%;
+  border-radius: var(--clean-radius-control);
+}
+
+/* Anchor links next to headings */
+.jp-RenderedHTMLCommon .jp-InternalAnchorLink {
+  color: var(--jp-content-font-color3);
+  margin-left: 0.3em;
+}
+
+/* Markdown tables keep the output-table look but align left */
+.jp-RenderedMarkdown.jp-RenderedHTMLCommon table {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Math */
+.jp-RenderedHTMLCommon mjx-container {
+  color: var(--jp-content-font-color1);
+}

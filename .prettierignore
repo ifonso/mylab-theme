@@ -1,0 +1,8 @@
+node_modules
+**/node_modules
+**/lib
+**/package.json
+!/package.json
+mylab_theme
+eslint.config.mjs
+.venv

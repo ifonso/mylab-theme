@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.6.5
+_src_path: https://github.com/jupyterlab/extension-template
+advanced: false
+author_email: ifonso.developer@gmail.com
+author_name: Afonso Lucas
+has_ai_rules: false
+has_binder: false
+has_settings: false
+kind: theme
+labextension_name: mylab-theme
+project_short_description: A JupyterLab minimalist theme based on RStudio and Datalore.
+python_name: mylab_theme
+repository: https://github.com/ifonso/clean-jupyter
+test: false
+

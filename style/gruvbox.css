@@ -1,0 +1,152 @@
+/*
+ * Dark variant: Gruvbox Dark, soft contrast (https://github.com/morhetz/gruvbox).
+ *
+ * Same theme, same layout: this file only swaps colour tokens. JupyterLab
+ * puts the active theme's name on <body data-jp-theme-name>, and the
+ * --jp-* mapping in variables.css is declared on body too, so overriding
+ * the --clean-* tokens here recolours the whole interface.
+ *
+ * Roles follow the light theme:
+ *   canvas (panels, notebook, toolbar)  bg0_s  #32302f
+ *   code cells                          bg1    #3c3836
+ *   chrome (menu bar, tabs, rails)      bg0    #282828  darker than both
+ * Syntax follows Gruvbox's own Python colours: keywords red, strings green,
+ * numbers and constants purple, functions aqua, builtins yellow, magics and
+ * decorators orange, comments grey.
+ */
+
+body[data-jp-theme-name='mylab-gruvbox-dark'] {
+  color-scheme: dark;
+
+  /* ---- Gruvbox palette ---- */
+  --gb-bg0-h: #1d2021;
+  --gb-bg0: #282828;
+  --gb-bg0-s: #32302f;
+  --gb-bg1: #3c3836;
+  --gb-bg2: #504945;
+  --gb-bg3: #665c54;
+  --gb-bg4: #7c6f64;
+  --gb-gray: #928374;
+  --gb-fg0: #fbf1c7;
+  --gb-fg1: #ebdbb2;
+  --gb-fg2: #d5c4a1;
+  --gb-fg3: #bdae93;
+  --gb-fg4: #a89984;
+  --gb-red: #fb4934;
+  --gb-green: #b8bb26;
+  --gb-yellow: #fabd2f;
+  --gb-blue: #83a598;
+  --gb-purple: #d3869b;
+  --gb-aqua: #8ec07c;
+  --gb-orange: #fe8019;
+  --gb-red-dim: #cc241d;
+  --gb-green-dim: #98971a;
+  --gb-yellow-dim: #d79921;
+  --gb-blue-dim: #458588;
+  --gb-purple-dim: #b16286;
+  --gb-aqua-dim: #689d6a;
+  --gb-orange-dim: #d65d0e;
+
+  /* ---- Theme tokens ---- */
+  --clean-canvas: var(--gb-bg0-s);
+  --clean-surface: var(--gb-bg1);
+  --clean-surface-2: #46403e; /* between bg1 and bg2 */
+  --clean-code-bg: var(--gb-bg1);
+  --clean-chrome: var(--gb-bg0);
+  --clean-chrome-line: var(--gb-bg1);
+  --clean-chrome-hover: rgba(235, 219, 178, 0.06);
+  --clean-border: var(--gb-bg2);
+  --clean-border-strong: var(--gb-bg3);
+  --clean-text-1: var(--gb-fg1);
+  --clean-text-2: var(--gb-fg4);
+  --clean-text-3: var(--gb-gray);
+  --clean-accent: var(--gb-blue);
+  --clean-accent-hover: #a1b8a4;
+  --clean-accent-subtle: #3f4340;
+  --clean-accent-soft: #56655e;
+  --clean-success: var(--gb-green);
+  --clean-success-subtle: #45432e;
+  --clean-warn: var(--gb-yellow);
+  --clean-warn-subtle: #4e442f;
+  --clean-error: var(--gb-red);
+  --clean-error-subtle: #4e3430;
+  --clean-syntax-orange: var(--gb-purple); /* role: numbers and constants */
+  --clean-syntax-violet: var(--gb-aqua); /* role: callables */
+  --clean-syntax-pink: var(--gb-orange); /* role: IPython magics */
+  --clean-on-accept: var(--gb-bg0);
+  --clean-editor-selection: #4a534e;
+  --clean-ansi-magenta: var(--gb-purple);
+  --clean-ansi-cyan: var(--gb-aqua);
+  --clean-ansi-magenta-bg: #4c3e40;
+  --clean-ansi-cyan-bg: #41473b;
+  --clean-shadow-float: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --clean-cell-shadow: 2px 3px 12px rgba(0, 0, 0, 0.35);
+
+  /* ---- JupyterLab variables with literal light values ---- */
+  --jp-shadow-umbra-color: rgba(0, 0, 0, 0.3);
+  --jp-shadow-penumbra-color: rgba(0, 0, 0, 0.24);
+  --jp-shadow-ambient-color: rgba(0, 0, 0, 0.2);
+  --jp-border-color3: var(--gb-bg1);
+  --jp-ui-font-color0: var(--gb-fg0);
+  --jp-ui-inverse-font-color0: var(--gb-bg0);
+  --jp-ui-inverse-font-color1: var(--gb-bg0);
+  --jp-ui-inverse-font-color2: rgba(40, 40, 40, 0.75);
+  --jp-ui-inverse-font-color3: rgba(40, 40, 40, 0.55);
+  --jp-content-font-color0: var(--gb-fg0);
+  --jp-inverse-layout-color0: var(--gb-fg0);
+  --jp-inverse-layout-color2: var(--gb-fg2);
+  --jp-brand-color2: var(--gb-blue-dim);
+  --jp-accent-color0: var(--gb-green-dim);
+  --jp-accent-color2: #6e7a2a;
+  --jp-warn-color0: var(--gb-yellow-dim);
+  --jp-warn-color2: #8f6a22;
+  --jp-error-color0: var(--gb-red-dim);
+  --jp-error-color2: #9d3b2c;
+  --jp-success-color0: var(--gb-green-dim);
+  --jp-success-color2: #6e7a2a;
+  --jp-accept-color-hover: var(--gb-fg0);
+  --jp-accept-color-active: var(--gb-fg2);
+  --jp-reject-color-hover: var(--gb-fg3);
+  --jp-reject-color-active: var(--gb-fg2);
+  --jp-warn-color-hover: var(--gb-red-dim);
+  --jp-warn-color-active: #9d0006;
+  --jp-dialog-background: rgba(0, 0, 0, 0.55);
+  --jp-editor-selected-background: #414542;
+  --jp-switch-cursor-color: rgba(235, 219, 178, 0.8);
+  --jp-icon-contrast-color0: var(--gb-purple);
+  --jp-icon-contrast-color2: var(--gb-red);
+  --jp-scrollbar-thumb-color: 102, 92, 84; /* bg3 as rgb */
+  --jp-collaborator-color1: var(--gb-orange);
+  --jp-collaborator-color2: var(--gb-yellow);
+  --jp-collaborator-color3: var(--gb-green);
+  --jp-collaborator-color4: var(--gb-aqua);
+  --jp-collaborator-color5: var(--gb-blue);
+  --jp-collaborator-color6: var(--gb-purple);
+  --jp-collaborator-color7: var(--gb-red);
+
+  /* ---- Syntax: Gruvbox's Python colours ---- */
+  --jp-mirror-editor-keyword-color: var(--gb-red);
+  --jp-mirror-editor-atom-color: var(--gb-purple);
+  --jp-mirror-editor-number-color: var(--gb-purple);
+  --jp-mirror-editor-def-color: var(--gb-aqua);
+  --jp-mirror-editor-builtin-color: var(--gb-yellow);
+  --jp-mirror-editor-meta-color: var(--gb-orange);
+  --jp-mirror-editor-string-color: var(--gb-green);
+  --jp-mirror-editor-string-2-color: var(--gb-green);
+  --jp-mirror-editor-comment-color: var(--gb-gray);
+  --jp-mirror-editor-variable-color: var(--gb-fg1);
+  --jp-mirror-editor-variable-2-color: var(--gb-fg4);
+  --jp-mirror-editor-variable-3-color: var(--gb-yellow);
+  --jp-mirror-editor-property-color: var(--gb-fg1);
+  --jp-mirror-editor-operator-color: var(--gb-fg4);
+  --jp-mirror-editor-punctuation-color: var(--gb-fg4);
+  --jp-mirror-editor-bracket-color: var(--gb-fg4);
+  --jp-mirror-editor-qualifier-color: var(--gb-fg4);
+  --jp-mirror-editor-tag-color: var(--gb-aqua);
+  --jp-mirror-editor-attribute-color: var(--gb-yellow);
+  --jp-mirror-editor-header-color: var(--gb-fg1);
+  --jp-mirror-editor-quote-color: var(--gb-fg4);
+  --jp-mirror-editor-link-color: var(--gb-blue);
+  --jp-mirror-editor-error-color: var(--gb-red);
+  --jp-mirror-editor-hr-color: var(--gb-bg3);
+}

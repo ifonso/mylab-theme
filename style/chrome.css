@@ -1,0 +1,629 @@
+/*
+ * Application chrome: menu bar, sidebar rail, side panels, main-area tabs,
+ * document toolbars, status bar and splitters.
+ *
+ * Rules of the layout:
+ * - Chrome is grey (--clean-chrome): menu bar, tab bar, sidebar rails.
+ *   Content is white: open side panel, document toolbar, document.
+ * - The selected tab (main area or rail) turns white and opens into the
+ *   content it controls. Unselected tabs stay in the chrome tone.
+ * - One line per boundary. Each frontier between two regions is drawn by a
+ *   single element; containers never repeat a neighbour's border.
+ */
+
+/* ---- Menu bar ----
+ * Warm grey band with a firm 1px rule underneath, so the menu reads as
+ * application chrome and the white workspace starts below it.
+ */
+#jp-top-panel {
+  background: var(--clean-chrome);
+  border-bottom: var(--jp-border-width) solid var(--clean-border-strong);
+}
+
+#jp-top-panel > *,
+#jp-MainLogo,
+#jp-menu-panel,
+#jp-title-panel-title,
+#jp-top-bar,
+#jp-top-panel .lm-MenuBar {
+  background: transparent;
+}
+
+.lm-MenuBar-item {
+  padding: 0 10px;
+  border-color: transparent;
+  color: var(--jp-ui-font-color1);
+}
+
+.lm-MenuBar-item.lm-mod-active {
+  background: var(--clean-chrome-hover);
+  border-color: transparent;
+  color: var(--jp-ui-font-color0);
+}
+
+/* Open menu: the item turns white and joins its dropdown */
+.lm-MenuBar.lm-mod-active .lm-MenuBar-item.lm-mod-active {
+  background: var(--clean-canvas);
+  border-color: transparent;
+  box-shadow:
+    inset 1px 0 0 var(--clean-border-strong),
+    inset -1px 0 0 var(--clean-border-strong);
+  color: var(--jp-ui-font-color0);
+}
+
+.lm-MenuBar-item.lm-type-separator {
+  border-left-color: var(--clean-border-strong);
+}
+
+/* ---- Sidebar rail (icon tabs on the left/right edges) ----
+ * The rail's own ::after (from core) is its single edge line. The current tab
+ * is white, sits above that line (z-index) and paints 1px of white over it,
+ * so it merges with the open panel. Lines above and below the current tab
+ * give it a tab shape; the first tab skips the top line because the menu bar
+ * rule is already there.
+ */
+.jp-SideBar.lm-TabBar {
+  background: var(--clean-chrome);
+  border: none;
+}
+
+.jp-SideBar.lm-TabBar.jp-mod-left::after {
+  border-right: var(--jp-border-width) solid var(--clean-border);
+}
+
+.jp-SideBar.lm-TabBar.jp-mod-right::after {
+  border-left: var(--jp-border-width) solid var(--clean-border);
+}
+
+/* Tabs span the full inner width of the rail so icons sit on its centre line */
+.jp-SideBar.lm-TabBar[data-orientation='vertical'] .lm-TabBar-content {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base look of every rail tab (lower specificity than the current-tab rules) */
+.jp-SideBar.lm-TabBar[data-orientation='vertical'] .lm-TabBar-tab {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 36px;
+  max-height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/*
+ * Core separates neighbouring tabs with border-top lines. Only borders are
+ * reset here, so these high-specificity selectors cannot override the
+ * current tab's background or merge shadow.
+ */
+.jp-SideBar.lm-TabBar[data-orientation='vertical']
+  .lm-TabBar-tab
+  + .lm-TabBar-tab,
+.jp-SideBar.lm-TabBar[data-orientation='vertical']
+  .lm-TabBar-tab
+  + .lm-TabBar-tab.lm-mod-current,
+.jp-SideBar.lm-TabBar[data-orientation='vertical']
+  .lm-TabBar-tab.lm-mod-current
+  + .lm-TabBar-tab {
+  border: none;
+}
+
+.jp-SideBar.lm-TabBar[data-orientation='vertical']
+  .lm-TabBar-tab:hover:not(.lm-mod-current) {
+  background: var(--clean-chrome-hover);
+}
+
+/* Core draws the merge with a white ::after; the box-shadows below do it instead */
+.jp-SideBar .lm-TabBar-tab.lm-mod-current::after {
+  content: none;
+}
+
+.jp-SideBar.lm-TabBar[data-orientation='vertical']
+  .lm-TabBar-tab.lm-mod-current {
+  z-index: 1;
+  background: var(--clean-canvas);
+}
+
+.jp-SideBar.lm-TabBar.jp-mod-left .lm-TabBar-tab.lm-mod-current {
+  box-shadow:
+    1px 0 0 var(--clean-canvas),
+    inset 0 1px 0 var(--clean-border),
+    inset 0 -1px 0 var(--clean-border);
+}
+
+.jp-SideBar.lm-TabBar.jp-mod-right .lm-TabBar-tab.lm-mod-current {
+  box-shadow:
+    -1px 0 0 var(--clean-canvas),
+    inset 0 1px 0 var(--clean-border),
+    inset 0 -1px 0 var(--clean-border);
+}
+
+.jp-SideBar.lm-TabBar.jp-mod-left .lm-TabBar-tab.lm-mod-current:first-child {
+  box-shadow:
+    1px 0 0 var(--clean-canvas),
+    inset 0 -1px 0 var(--clean-border);
+}
+
+.jp-SideBar.lm-TabBar.jp-mod-right .lm-TabBar-tab.lm-mod-current:first-child {
+  box-shadow:
+    -1px 0 0 var(--clean-canvas),
+    inset 0 -1px 0 var(--clean-border);
+}
+
+.jp-SideBar .lm-TabBar-tab:hover:not(.lm-mod-current) .jp-icon3[fill],
+.jp-SideBar
+  .lm-TabBar-tab:hover:not(.lm-mod-current)
+  .jp-icon-selectable[fill] {
+  fill: var(--jp-ui-font-color1);
+}
+
+.jp-SideBar .lm-TabBar-tab.lm-mod-current .jp-icon3[fill],
+.jp-SideBar .lm-TabBar-tab.lm-mod-current .jp-icon-selectable[fill] {
+  fill: var(--clean-accent);
+}
+
+.jp-SideBar .lm-TabBar-tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  min-height: 18px;
+  background-size: 18px;
+}
+
+.jp-SideBar .lm-TabBar-tabIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* The vertical label is empty for icon tabs; keep it from taking space */
+.jp-SideBar.lm-TabBar[data-orientation='vertical'] .lm-TabBar-tabLabel:empty {
+  display: none;
+}
+
+/* ---- Side panels (file browser, running, TOC, extensions) ---- */
+#jp-left-stack,
+#jp-right-stack,
+.jp-SidePanel,
+.jp-SidePanel-content {
+  background: var(--jp-layout-color1);
+}
+
+/* The split handle draws the panel/document boundary; side areas draw none */
+.jp-SideArea[data-side='left'],
+.jp-SideArea[data-side='right'],
+#jp-left-stack,
+#jp-right-stack {
+  border: none;
+}
+
+.jp-SidePanel-header {
+  padding: 6px 4px;
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  color: var(--jp-ui-font-color2);
+  font-size: var(--clean-label-size);
+  letter-spacing: var(--clean-label-tracking);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.jp-SidePanel-header > h2 {
+  font-weight: 700;
+  padding: 2px 10px;
+}
+
+.jp-SidePanel-toolbar,
+.jp-AccordionPanel-toolbar {
+  height: 36px;
+}
+
+.lm-AccordionPanel > h3.lm-AccordionPanel-title {
+  background: var(--jp-layout-color1);
+  border-top: var(--jp-border-width) solid var(--jp-border-color1);
+  color: var(--jp-ui-font-color2);
+  font-size: var(--clean-label-size);
+  letter-spacing: var(--clean-label-tracking);
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 8px 10px;
+}
+
+.lm-AccordionPanel > h3.lm-AccordionPanel-title:first-child {
+  border-top: none;
+}
+
+/* ---- Main area tabs ----
+ * Grey bar with one baseline drawn by the bar itself (inset shadow).
+ * Unselected tabs are transparent, so they sit on the baseline and read as
+ * part of the bar. The selected tab is white: it covers the baseline and opens
+ * into the white toolbar below, with the 2px accent only on top. Every tab
+ * draws its right divider; the left side is the previous tab's divider or,
+ * for the first tab, the split handle.
+ */
+.lm-DockPanel-tabBar,
+.lm-TabPanel-tabBar {
+  background: var(--clean-chrome);
+  box-shadow: inset 0 -1px 0 var(--clean-chrome-line);
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-tab,
+.lm-TabPanel-tabBar .lm-TabBar-tab {
+  position: relative;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  border-right: var(--jp-border-width) solid var(--clean-chrome-line);
+  color: var(--jp-ui-font-color2);
+  padding: 0 12px;
+  margin-left: 0;
+  line-height: 32px;
+  min-height: 33px;
+  max-height: 33px;
+  flex: 0 1 var(--jp-private-horizontal-tab-width);
+}
+
+/* Core draws a second baseline per tab with ::after; the bar's shadow replaces it */
+.lm-DockPanel-tabBar .lm-TabBar-tab::after,
+.lm-DockPanel-tabBar .lm-TabBar-tab:not(.lm-mod-current)::after,
+.lm-DockPanel-tabBar .lm-TabBar-addButton::after,
+.lm-TabPanel-tabBar .lm-TabBar-tab::after,
+.lm-TabPanel-tabBar .lm-TabBar-tab:not(.lm-mod-current)::after {
+  content: none;
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-tab:hover:not(.lm-mod-current),
+.lm-TabPanel-tabBar .lm-TabBar-tab:hover:not(.lm-mod-current) {
+  background: var(--clean-chrome-hover);
+  color: var(--jp-ui-font-color1);
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-tab.lm-mod-current,
+.lm-TabPanel-tabBar .lm-TabBar-tab.lm-mod-current {
+  background: var(--clean-canvas);
+  color: var(--jp-ui-font-color1);
+  box-shadow: none;
+  min-height: 33px;
+  max-height: 33px;
+  transform: none;
+}
+
+/* Accent line on top of the selected tab, inside the tab's own width */
+.lm-DockPanel-tabBar .lm-TabBar-tab.jp-mod-current::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--clean-accent);
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-tabLabel {
+  font-size: var(--jp-ui-font-size1);
+  font-weight: 400;
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-tab .lm-TabBar-tabIcon {
+  width: 14px;
+  margin-right: 6px;
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-tab .lm-TabBar-tabCloseIcon {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-tab:hover .lm-TabBar-tabCloseIcon,
+.lm-DockPanel-tabBar .lm-TabBar-tab.lm-mod-current .lm-TabBar-tabCloseIcon,
+.lm-DockPanel-tabBar .lm-TabBar-tab.jp-mod-dirty .lm-TabBar-tabCloseIcon {
+  opacity: 1;
+}
+
+/* "+" (new launcher) after the last tab: same height as a tab, icon centred */
+.lm-DockPanel-tabBar .lm-TabBar-addButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  box-sizing: border-box;
+  width: 32px;
+  height: auto;
+  margin: var(--jp-border-width) 0 0; /* tabs start 1px below the bar edge */
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--jp-ui-font-color3);
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-addButton:hover {
+  background: var(--clean-chrome-hover);
+}
+
+.lm-DockPanel-tabBar .lm-TabBar-addButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Documents draw no frame: the tab bar, handles and status bar bound them */
+.lm-DockPanel-widget {
+  border: none;
+}
+
+.lm-TabPanel-stackedPanel {
+  border-color: var(--clean-border);
+}
+
+/* ---- Document toolbar ---- */
+.jp-Toolbar {
+  background: var(--jp-toolbar-background);
+  border-bottom: var(--jp-border-width) solid var(--jp-toolbar-border-color);
+  box-shadow: none;
+  min-height: 36px;
+  padding: 0 8px;
+}
+
+.jp-NotebookPanel-toolbar {
+  padding: 0 12px;
+}
+
+.jp-Toolbar > .jp-Toolbar-item {
+  margin: 0 1px;
+}
+
+.jp-Toolbar .jp-ToolbarButtonComponent,
+button.jp-ToolbarButtonComponent {
+  border-radius: var(--clean-radius-control);
+  min-height: 26px;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: center;
+  color: var(--jp-ui-font-color2);
+}
+
+/*
+ * jp-button renders its icon inside a shadow <button part="control"> with a
+ * fixed height. Stretch it over the whole host so the icon sits in the
+ * optical centre of the 26px hit area.
+ */
+.jp-ToolbarButtonComponent::part(control) {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+}
+
+.jp-Toolbar .jp-ToolbarButtonComponent:hover,
+button.jp-ToolbarButtonComponent:hover {
+  background: var(--clean-surface);
+}
+
+.jp-Toolbar .jp-ToolbarButtonComponent:active,
+.jp-Toolbar .jp-ToolbarButtonComponent.jp-mod-pressed {
+  background: var(--clean-surface-2);
+}
+
+.jp-Toolbar .jp-Toolbar-spacer {
+  background: transparent;
+}
+
+/* Cell-type select in the toolbar */
+.jp-Toolbar .jp-HTMLSelect.jp-DefaultStyle select,
+.jp-Notebook-toolbarCellType select.jp-Notebook-toolbarCellTypeDropdown {
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-control);
+  height: 26px;
+  line-height: 24px;
+  padding: 0 24px 0 8px;
+  font-size: var(--jp-ui-font-size1);
+  color: var(--jp-ui-font-color1);
+  background-color: var(--jp-layout-color1);
+}
+
+.jp-Toolbar .jp-HTMLSelect.jp-DefaultStyle select:hover {
+  background-color: var(--clean-surface);
+  border-color: var(--jp-border-color0);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-Toolbar .jp-HTMLSelect.jp-DefaultStyle svg {
+  top: 5px;
+}
+
+/* Kernel name + status on the right of the toolbar */
+.jp-Toolbar .jp-KernelName .jp-ToolbarButtonComponent-label,
+.jp-Toolbar button.jp-ToolbarButtonComponent .jp-ToolbarButtonComponent-label {
+  color: var(--jp-ui-font-color2);
+  font-size: var(--jp-ui-font-size1);
+}
+
+/* ---- Status bar ---- */
+#jp-bottom-panel,
+.jp-StatusBar-Widget {
+  background: var(--jp-layout-color1);
+}
+
+.jp-StatusBar-Widget {
+  border-top: var(--jp-border-width) solid var(--jp-border-color1);
+  color: var(--jp-ui-font-color3);
+  font-size: 12px;
+  min-height: var(--jp-statusbar-height);
+}
+
+.jp-StatusBar-TextItem {
+  color: var(--jp-ui-font-color3);
+  font-size: 12px;
+  line-height: var(--jp-statusbar-height);
+}
+
+.jp-StatusBar-Item:hover {
+  background: var(--clean-surface);
+}
+
+/* Clickable items get a background only while hovered, as in core */
+.jp-StatusBar-Item.jp-mod-highlighted:hover {
+  background: var(--clean-surface-2);
+}
+
+.jp-StatusBar-Item.jp-mod-highlighted:hover .jp-StatusBar-TextItem {
+  color: var(--jp-ui-font-color1);
+}
+
+/* Notification bell: 14px, vertically centred next to its counter */
+.jp-Notification-Status .jp-StatusBar-GroupItem > div {
+  display: flex;
+  align-items: center;
+}
+
+.jp-Notification-Status svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---- Splitters ----
+ * Handles are the boundary line between panels: 1px centred in the handle
+ * box, drawn with a gradient so the wider grab area stays invisible.
+ */
+.lm-SplitPanel-handle,
+.lm-DockPanel-handle,
+#jp-main-split-panel > .lm-SplitPanel-handle {
+  background: transparent;
+}
+
+#jp-main-split-panel > .lm-SplitPanel-handle,
+.lm-SplitPanel[data-orientation='horizontal'] > .lm-SplitPanel-handle,
+.lm-DockPanel-handle[data-orientation='horizontal'] {
+  background: linear-gradient(var(--clean-border), var(--clean-border)) center /
+    1px 100% no-repeat;
+}
+
+.lm-SplitPanel[data-orientation='vertical'] > .lm-SplitPanel-handle,
+.lm-DockPanel-handle[data-orientation='vertical'] {
+  background: linear-gradient(var(--clean-border), var(--clean-border)) center /
+    100% 1px no-repeat;
+}
+
+#jp-main-split-panel > .lm-SplitPanel-handle:hover,
+.lm-SplitPanel[data-orientation='horizontal'] > .lm-SplitPanel-handle:hover,
+.lm-DockPanel-handle[data-orientation='horizontal']:hover {
+  background-image: linear-gradient(
+    var(--clean-border-strong),
+    var(--clean-border-strong)
+  );
+}
+
+.lm-SplitPanel[data-orientation='vertical'] > .lm-SplitPanel-handle:hover,
+.lm-DockPanel-handle[data-orientation='vertical']:hover {
+  background-image: linear-gradient(
+    var(--clean-border-strong),
+    var(--clean-border-strong)
+  );
+}
+
+.lm-SplitPanel-handle::after,
+.lm-DockPanel-handle::after {
+  background: transparent;
+}
+
+/*
+ * A vertical handle between two documents also crosses their tab bars.
+ * Paint the bar's chrome tone and baseline across that top strip so the
+ * tab bar reads as continuous, with the 1px divider running through it.
+ * 34px is the tab bar height; its baseline sits on the last pixel row.
+ */
+.lm-DockPanel-handle[data-orientation='horizontal'] {
+  background:
+    linear-gradient(var(--clean-border), var(--clean-border)) center top / 1px
+      100% no-repeat,
+    linear-gradient(var(--clean-chrome-line), var(--clean-chrome-line)) left
+      33px / 100% 1px no-repeat,
+    linear-gradient(var(--clean-chrome), var(--clean-chrome)) left top / 100%
+      34px no-repeat;
+}
+
+.lm-DockPanel-handle[data-orientation='horizontal']:hover {
+  background:
+    linear-gradient(var(--clean-border-strong), var(--clean-border-strong))
+      center top / 1px 100% no-repeat,
+    linear-gradient(var(--clean-chrome-line), var(--clean-chrome-line)) left
+      33px / 100% 1px no-repeat,
+    linear-gradient(var(--clean-chrome), var(--clean-chrome)) left top / 100%
+      34px no-repeat;
+}
+
+/*
+ * Dock handles sit over the shell background; give them the content white.
+ * Declared after the shorthands above (same specificity) so it wins.
+ */
+.lm-DockPanel-handle[data-orientation],
+.lm-DockPanel-handle[data-orientation]:hover {
+  background-color: var(--clean-canvas);
+}
+
+/* ---- Launcher ---- */
+.jp-Launcher-body,
+.jp-Launcher-content {
+  background: var(--jp-layout-color1);
+}
+
+.jp-Launcher-content {
+  padding: 24px 32px;
+}
+
+.jp-Launcher-cwd h3 {
+  font-family: var(--jp-code-font-family);
+  font-size: 12px;
+  color: var(--jp-ui-font-color3);
+  margin: 0 0 1em;
+}
+
+.jp-Launcher-sectionHeader {
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  margin-left: 0;
+  padding-bottom: 4px;
+}
+
+.jp-Launcher-sectionTitle {
+  font-size: var(--clean-label-size);
+  letter-spacing: var(--clean-label-tracking);
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-Launcher-sectionHeader .jp-Launcher-sectionIcon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.jp-LauncherCard {
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-card);
+  box-shadow: none;
+  margin: 8px 8px 8px 0;
+  background: var(--jp-layout-color1);
+}
+
+.jp-LauncherCard:hover,
+.jp-LauncherCard:active,
+.jp-LauncherCard:focus:not(:active) {
+  box-shadow: none;
+  border-color: var(--jp-border-color0);
+  background: var(--clean-surface);
+}
+
+.jp-LauncherCard-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.jp-LauncherCard-label p {
+  color: var(--jp-ui-font-color2);
+  font-size: 12px;
+}

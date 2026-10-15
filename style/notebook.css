@@ -1,0 +1,318 @@
+/*
+ * Notebook and cells, after JetBrains Datalore.
+ *
+ * - A cell is one straight-cornered block: the code area (near-white grey)
+ *   with its outputs (white) underneath.
+ * - The frame belongs to the whole cell, drawn by .jp-Cell::after so it
+ *   never shifts content: invisible when idle, accent blue plus a soft
+ *   drop shadow when the cell is selected. Markdown cells also show a grey
+ *   frame on hover.
+ * - The execution count "[n]" sits in a left gutter, outside the frame,
+ *   aligned with the first line of code.
+ * - The notebook is centred in a readable column.
+ */
+
+/* ---- Console ---- */
+.jp-CodeConsole {
+  background: var(--jp-layout-color1);
+}
+
+.jp-CodeConsole-promptCell .jp-InputArea-editor {
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-cell);
+}
+
+.jp-CodeConsole-promptCell .jp-InputArea-editor.jp-mod-focused {
+  border-color: var(--clean-accent);
+  box-shadow: none;
+}
+
+/* ---- Notebook column (side padding leaves room for the prompt gutter) ---- */
+.jp-NotebookPanel-notebook,
+.jp-Notebook {
+  background: var(--jp-layout-color1);
+}
+
+.jp-Notebook .jp-WindowedPanel-viewport {
+  padding: 28px var(--clean-prompt-gutter) 0;
+}
+
+.jp-Notebook .jp-Cell {
+  position: relative;
+  max-width: var(--clean-notebook-max-width);
+  margin: 0 auto;
+  padding: 0 0 16px; /* gap to the next cell; the frame stops above it */
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.jp-Notebook-footer {
+  max-width: var(--clean-notebook-max-width);
+  width: calc(100% - 2 * var(--clean-prompt-gutter));
+  margin: 0 auto 32px;
+  height: 32px;
+  border: 1px dashed var(--jp-border-color0);
+  border-radius: var(--clean-radius-cell);
+  background: transparent;
+  color: var(--jp-ui-font-color3);
+}
+
+.jp-Notebook-footer:hover,
+.jp-Notebook-footer:focus {
+  border-color: var(--clean-accent);
+  background: var(--clean-surface);
+}
+
+/* ---- The cell frame ---- */
+.jp-Notebook .jp-Cell::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 16px;
+  z-index: 1;
+  border: var(--jp-border-width) solid transparent;
+  border-radius: var(--clean-radius-cell);
+  pointer-events: none;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.jp-Notebook .jp-MarkdownCell:hover::after {
+  border-color: var(--jp-border-color0);
+}
+
+.jp-Notebook .jp-Cell.jp-mod-active::after,
+.jp-Notebook .jp-Cell.jp-mod-active:hover::after {
+  border-color: var(--jp-cell-editor-active-border-color);
+  box-shadow: var(--clean-cell-shadow);
+}
+
+/* ---- Collapsers: hidden. The frame already signals the active cell. ---- */
+.jp-Notebook .jp-Collapser,
+.jp-Notebook .jp-Cell .jp-Collapser:hover,
+.jp-Notebook .jp-Cell.jp-mod-active .jp-Collapser {
+  display: none;
+}
+
+/* ---- Selection states ---- */
+.jp-Notebook.jp-mod-commandMode .jp-Cell.jp-mod-selected {
+  background: transparent;
+}
+
+.jp-Notebook.jp-mod-commandMode .jp-Cell.jp-mod-multiSelected,
+.jp-Notebook.jp-mod-commandMode .jp-Cell.jp-mod-selected.jp-mod-multiSelected {
+  background: transparent;
+}
+
+.jp-Notebook.jp-mod-commandMode .jp-Cell.jp-mod-multiSelected::after {
+  border-color: var(--clean-accent-soft);
+  background: color-mix(in srgb, var(--clean-accent-subtle) 45%, transparent);
+}
+
+.jp-Notebook.jp-mod-commandMode .jp-Cell.jp-mod-active:focus-visible {
+  box-shadow: none;
+  border: none;
+}
+
+/* ---- Prompts in the left gutter ---- */
+
+/* Core clips the input area; the prompt lives outside it, so let it show */
+.jp-Notebook .jp-Cell .jp-Cell-inputWrapper {
+  position: relative;
+  overflow: visible;
+}
+
+.jp-Notebook .jp-Cell .jp-InputArea {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Code cell: "[n]" right-aligned in the gutter, on the first code line */
+.jp-Notebook .jp-CodeCell .jp-InputPrompt {
+  position: absolute;
+  top: var(--clean-code-pad-y);
+  right: 100%;
+  width: calc(var(--clean-prompt-gutter) - 10px);
+  margin-right: 10px;
+  padding: 0;
+  flex: none;
+  font-family: var(--jp-cell-prompt-font-family);
+  font-size: var(--clean-label-size);
+  line-height: calc(var(--jp-code-font-size) * var(--jp-code-line-height));
+  letter-spacing: 0;
+  color: var(--jp-cell-prompt-not-active-font-color);
+  opacity: 1;
+  text-align: right;
+  user-select: none;
+}
+
+.jp-Notebook .jp-CodeCell.jp-mod-active .jp-InputPrompt {
+  color: var(--jp-cell-inprompt-font-color);
+}
+
+.jp-Notebook .jp-Cell.jp-mod-dirty .jp-InputPrompt {
+  color: var(--jp-warn-color1);
+}
+
+/* Markdown cell: zero-width prompt that holds the heading-collapse caret */
+.jp-Notebook .jp-MarkdownCell .jp-InputPrompt {
+  position: absolute;
+  left: -28px;
+  top: 0;
+  width: 24px;
+  height: 100%;
+  flex: none;
+  padding: 0;
+  font-size: 0;
+  opacity: 1;
+}
+
+.jp-Notebook .jp-MarkdownCell.jp-mod-rendered .jp-InputPrompt::before {
+  content: none;
+}
+
+/* ---- Code area: grey fill, no border of its own ---- */
+.jp-Notebook .jp-InputArea-editor,
+.jp-Notebook .jp-Cell.jp-mod-active .jp-InputArea-editor,
+.jp-Notebook.jp-mod-editMode .jp-Cell.jp-mod-active .jp-InputArea-editor {
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  margin-left: 0;
+  border: none;
+  border-radius: var(--clean-radius-cell);
+  box-shadow: none;
+  background: var(--jp-cell-editor-background);
+}
+
+/* Collapsed input placeholder looks like a one-line code area */
+.jp-Notebook .jp-InputPlaceholder > .jp-Placeholder-content {
+  border: none;
+  border-radius: var(--clean-radius-cell);
+  background: var(--jp-cell-editor-background);
+  padding: 6px var(--clean-cell-inset);
+}
+
+.jp-Notebook .jp-Placeholder-prompt {
+  display: none;
+}
+
+.jp-Notebook .jp-PlaceholderText {
+  color: var(--jp-ui-font-color3);
+  font-size: 12px;
+}
+
+/* ---- Cell toolbar (hover actions): top-right, inside the frame ---- */
+.jp-Notebook .jp-cell-toolbar {
+  top: 4px;
+  right: 6px;
+  z-index: 6;
+  min-height: 24px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.jp-Notebook .jp-cell-toolbar .jp-ToolbarButtonComponent {
+  min-height: 22px;
+  padding: 0 4px;
+}
+
+.jp-Notebook .jp-cell-toolbar .jp-ToolbarButtonComponent svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---- Markdown cells ---- */
+.jp-Notebook .jp-MarkdownCell .jp-Cell-inputWrapper {
+  overflow: visible;
+}
+
+.jp-Notebook .jp-collapseHeadingButton {
+  width: 24px;
+  min-height: 24px;
+  background-size: 18px;
+  background-position-x: center;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.jp-Notebook .jp-MarkdownCell:hover .jp-collapseHeadingButton,
+.jp-Notebook .jp-MarkdownCell.jp-mod-active .jp-collapseHeadingButton,
+.jp-Notebook .jp-collapseHeadingButton.jp-mod-collapsed {
+  opacity: 1;
+}
+
+/* Text lines up with code text; the cell frame (above) handles states */
+.jp-Notebook .jp-MarkdownCell .jp-MarkdownOutput,
+.jp-Notebook .jp-MarkdownCell .jp-MarkdownOutput.jp-RenderedHTMLCommon {
+  display: block;
+  margin: 0;
+  padding: 8px var(--clean-cell-inset);
+  border: none;
+  border-radius: var(--clean-radius-cell);
+}
+
+/* Hidden cells / "show hidden cells" button */
+.jp-Notebook .jp-showHiddenCellsButton {
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-control);
+  color: var(--jp-ui-font-color2);
+  background: var(--jp-layout-color1);
+}
+
+/* ---- Outputs: white, inside the cell frame, aligned to the code inset ---- */
+.jp-Notebook .jp-Cell:not(.jp-mod-noOutputs) .jp-Cell-outputWrapper {
+  margin-top: 0;
+  padding: 10px 0 12px;
+}
+
+.jp-Notebook .jp-OutputArea-prompt {
+  display: none;
+}
+
+.jp-Notebook .jp-OutputArea-child {
+  display: flex;
+  flex-direction: row;
+}
+
+.jp-Notebook .jp-OutputArea-child .jp-OutputArea-output {
+  padding-left: var(--clean-cell-inset);
+  padding-right: var(--clean-cell-inset);
+}
+
+.jp-Notebook .jp-OutputArea-child + .jp-OutputArea-child {
+  margin-top: 6px;
+}
+
+/* Scrolled outputs: flat inset shadow replaced with a hairline */
+.jp-CodeCell.jp-mod-outputsScrolled .jp-Cell-outputArea {
+  margin: 0 var(--clean-cell-inset);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  border-radius: var(--clean-radius-cell);
+}
+
+.jp-CodeCell.jp-mod-outputsScrolled .jp-Cell-outputArea::after {
+  box-shadow: none;
+}
+
+/* Output placeholder (collapsed output) */
+.jp-Notebook .jp-OutputPlaceholder > .jp-Placeholder-content {
+  padding: 4px var(--clean-cell-inset);
+}
+
+/* ---- Side-by-side rendering ---- */
+.jp-mod-sideBySide.jp-Notebook .jp-CodeCell .jp-CellResizeHandle {
+  padding: 0 8px;
+}
+
+/* ---- Execution indicator in the toolbar ---- */
+.jp-Notebook-ExecutionIndicator-tooltip {
+  background: var(--jp-layout-color1);
+  border: var(--jp-border-width) solid var(--jp-border-color1);
+  box-shadow: var(--clean-shadow-float);
+}

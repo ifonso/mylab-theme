@@ -1,0 +1,228 @@
+/* Outputs: tables, text streams, stderr, tracebacks, ANSI colours. */
+
+/* ---- Text outputs ---- */
+.jp-ThemedContainer .jp-RenderedText pre,
+.jp-ThemedContainer .jp-RenderedJavaScript pre {
+  font-family: var(--jp-code-font-family);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--jp-content-font-color1);
+}
+
+.jp-Notebook .jp-RenderedText {
+  padding: 2px 0;
+}
+
+/* stderr and error tracebacks: pale band with a 2px bar at the inset */
+.jp-RenderedText[data-mime-type='application/vnd.jupyter.stderr'] {
+  background: var(--jp-rendermime-error-background);
+  border-left: 2px solid var(--clean-warn);
+  border-radius: 0 var(--clean-radius-control) var(--clean-radius-control) 0;
+  padding: 8px 12px;
+  margin-left: var(--clean-cell-inset);
+}
+
+.jp-Notebook
+  .jp-OutputArea-child
+  .jp-RenderedText[data-mime-type='application/vnd.jupyter.stderr'].jp-OutputArea-output {
+  padding-left: 12px;
+}
+
+/* ANSI palette, desaturated to match the theme */
+.jp-RenderedText pre .ansi-black-fg {
+  color: var(--clean-text-1);
+}
+
+.jp-RenderedText pre .ansi-red-fg {
+  color: var(--clean-error);
+}
+
+.jp-RenderedText pre .ansi-green-fg {
+  color: var(--clean-success);
+}
+
+.jp-RenderedText pre .ansi-yellow-fg {
+  color: var(--clean-warn);
+}
+
+.jp-RenderedText pre .ansi-blue-fg {
+  color: var(--clean-accent);
+}
+
+.jp-RenderedText pre .ansi-magenta-fg {
+  color: var(--clean-ansi-magenta);
+}
+
+.jp-RenderedText pre .ansi-cyan-fg {
+  color: var(--clean-ansi-cyan);
+}
+
+.jp-RenderedText pre .ansi-white-fg {
+  color: var(--clean-text-3);
+}
+
+.jp-RenderedText pre .ansi-bright-black-fg {
+  color: var(--clean-text-2);
+}
+
+.jp-RenderedText pre .ansi-bright-red-fg {
+  color: var(--clean-error);
+}
+
+.jp-RenderedText pre .ansi-bright-green-fg {
+  color: var(--clean-success);
+}
+
+.jp-RenderedText pre .ansi-bright-yellow-fg {
+  color: var(--clean-warn);
+}
+
+.jp-RenderedText pre .ansi-bright-blue-fg {
+  color: var(--clean-accent);
+}
+
+.jp-RenderedText pre .ansi-bright-magenta-fg {
+  color: var(--clean-ansi-magenta);
+}
+
+.jp-RenderedText pre .ansi-bright-cyan-fg {
+  color: var(--clean-ansi-cyan);
+}
+
+.jp-RenderedText pre .ansi-bright-white-fg {
+  color: var(--clean-text-3);
+}
+
+.jp-RenderedText pre .ansi-black-bg {
+  background: var(--clean-text-1);
+}
+
+.jp-RenderedText pre .ansi-red-bg {
+  background: var(--clean-error-subtle);
+}
+
+.jp-RenderedText pre .ansi-green-bg {
+  background: var(--clean-success-subtle);
+}
+
+.jp-RenderedText pre .ansi-yellow-bg {
+  background: var(--clean-warn-subtle);
+}
+
+.jp-RenderedText pre .ansi-blue-bg {
+  background: var(--clean-accent-subtle);
+}
+
+.jp-RenderedText pre .ansi-magenta-bg {
+  background: var(--clean-ansi-magenta-bg);
+}
+
+.jp-RenderedText pre .ansi-cyan-bg {
+  background: var(--clean-ansi-cyan-bg);
+}
+
+.jp-RenderedText pre .ansi-white-bg {
+  background: var(--clean-surface-2);
+}
+
+.jp-RenderedText pre .ansi-bold {
+  font-weight: 600;
+}
+
+/* ---- Tables (pandas and markdown) ---- */
+:not(.jp-RenderedMarkdown).jp-RenderedHTMLCommon td,
+:not(.jp-RenderedMarkdown).jp-RenderedHTMLCommon th,
+:not(.jp-RenderedMarkdown).jp-RenderedHTMLCommon tr {
+  text-align: left;
+}
+
+.jp-RenderedHTMLCommon table {
+  font-family: var(--jp-ui-font-family);
+  font-size: 13px;
+  color: var(--jp-ui-font-color1);
+  border-collapse: collapse;
+  border: none;
+  margin: 6px 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.jp-OutputArea-output.jp-RenderedHTMLCommon table {
+  margin-left: 0;
+}
+
+.jp-RenderedHTMLCommon thead {
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  background: var(--clean-surface);
+}
+
+.jp-RenderedHTMLCommon th {
+  font-weight: 700;
+  font-size: var(--clean-label-size);
+  letter-spacing: var(--clean-label-tracking);
+  text-transform: uppercase;
+  color: var(--jp-ui-font-color2);
+  padding: 7px 12px;
+  white-space: nowrap;
+}
+
+.jp-RenderedHTMLCommon td {
+  padding: 6px 12px;
+  line-height: 1.4;
+  border: none;
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-RenderedHTMLCommon tbody th {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-family: var(--jp-code-font-family);
+  color: var(--jp-ui-font-color3);
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  background: transparent;
+}
+
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+.jp-RenderedHTMLCommon tbody tr:nth-child(even) {
+  background: var(--jp-rendermime-table-row-background);
+}
+
+.jp-RenderedHTMLCommon tbody tr:hover {
+  background: var(--jp-rendermime-table-row-hover-background);
+}
+
+.jp-RenderedHTMLCommon tbody tr:last-child td,
+.jp-RenderedHTMLCommon tbody tr:last-child th {
+  border-bottom: none;
+}
+
+/* pandas index name rows and multi-index headers */
+.jp-RenderedHTMLCommon .dataframe thead tr:nth-child(n + 2) th {
+  background: transparent;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  color: var(--jp-ui-font-color3);
+}
+
+/* ---- Images and widgets ---- */
+.jp-RenderedImage img,
+.jp-RenderedSVG svg {
+  max-width: 100%;
+  border-radius: var(--clean-radius-control);
+}
+
+/* ---- JSON / tree renderer ---- */
+.jp-RenderedJSON {
+  font-family: var(--jp-code-font-family);
+  font-size: 13px;
+}
+
+/* ---- Log console ---- */
+.jp-LogConsolePanel .jp-OutputArea-prompt {
+  display: block;
+  border-radius: 3px;
+  font-size: 11px;
+}

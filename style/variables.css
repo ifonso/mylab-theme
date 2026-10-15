@@ -1,0 +1,369 @@
+/*
+ * Design tokens (--clean-*) and their mapping onto JupyterLab's public
+ * theme variables (--jp-*). Component files use only these variables.
+ */
+
+/*
+ * Declared on body as well as :root: custom properties resolve where they
+ * are declared, so the --jp-* mapping must be recomputed on <body>, where a
+ * theme variant (style/gruvbox.css) swaps the --clean-* tokens.
+ */
+:root,
+body {
+  /* ---- Tokens: color (warm monochrome + one blue accent) ---- */
+  --clean-canvas: #fff;
+  --clean-surface: #f8f7f5;
+  --clean-surface-2: #f0eeea;
+  --clean-code-bg: #f8f8f7; /* code cells: near-white neutral grey, as in Datalore */
+  --clean-chrome: #edebe7; /* menu bar, tab bar, rails: clearly darker than code cells (#f8f8f7) */
+  --clean-chrome-line: #dfdcd6; /* hairlines drawn on top of the chrome tone */
+  --clean-chrome-hover: rgba(0, 0, 0, 0.05);
+  --clean-border: #e6e4e0;
+  --clean-border-strong: #d3d0ca;
+  --clean-text-1: #1f1f1f;
+  --clean-text-2: #6b6966;
+  --clean-text-3: #9c9a96;
+  --clean-accent: #2f6fbf;
+  --clean-accent-hover: #275fa6;
+  --clean-accent-subtle: #eaf1fa;
+  --clean-accent-soft: #a9c4e8;
+  --clean-success: #2e7d4f;
+  --clean-success-subtle: #edf3ec;
+  --clean-warn: #b8731b;
+  --clean-warn-subtle: #fbf3db;
+  --clean-error: #c0392b;
+  --clean-error-subtle: #fdebec;
+
+  /* Syntax accents beyond blue/green */
+  --clean-syntax-orange: #bd682d; /* soft terracotta: numbers, decorators */
+  --clean-syntax-violet: #7d55b5; /* callables: defined functions/classes and builtins */
+  --clean-syntax-pink: #b0427a; /* IPython magics; 5.06:1 on the code bg */
+
+  /* Formerly hard-coded in component CSS; tokens so the dark variant can swap them */
+  --clean-on-accept: #fff; /* text on filled primary/danger buttons */
+  --clean-editor-selection: #d9e6f7; /* text selection outside the editor */
+  --clean-ansi-magenta: #8b45c6;
+  --clean-ansi-cyan: #1b7f8c;
+  --clean-ansi-magenta-bg: #f1e8fa;
+  --clean-ansi-cyan-bg: #e3f3f5;
+
+  /* ---- Tokens: type ---- */
+  --clean-font-ui:
+    'Lato', -apple-system, blinkmacsystemfont, 'Segoe UI', helvetica, arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --clean-font-code:
+    'JetBrains Mono', 'SF Mono', menlo, consolas, 'DejaVu Sans Mono', monospace;
+  --clean-label-size: 11px;
+  --clean-label-tracking: 0.04em;
+
+  /* ---- Tokens: shape ---- */
+  --clean-radius-cell: 0; /* cells and code blocks: straight corners (JetBrains) */
+  --clean-radius-popup: 2px; /* completer, tooltips */
+  --clean-radius-card: 6px; /* menus, dialogs, launcher cards, notifications */
+  --clean-cell-shadow: 2px 3px 10px rgba(31, 31, 31, 0.08); /* selected cell */
+  --clean-prompt-gutter: 64px; /* left margin that holds the [n] prompt */
+  --clean-code-pad-y: 10px; /* vertical padding of the code area; prompt aligns to it */
+  --clean-radius-control: 4px;
+  --clean-notebook-max-width: 900px;
+  --clean-shadow-float: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --clean-cell-inset: 14px; /* horizontal padding inside the code frame */
+
+  /* ---- Elevation: flat. Only floating surfaces get a diffuse shadow. ---- */
+  --jp-shadow-base-lightness: 0;
+  --jp-shadow-umbra-color: rgba(0, 0, 0, 0.04);
+  --jp-shadow-penumbra-color: rgba(0, 0, 0, 0.03);
+  --jp-shadow-ambient-color: rgba(0, 0, 0, 0.02);
+  --jp-elevation-z0: none;
+  --jp-elevation-z1: none;
+  --jp-elevation-z2: none;
+  --jp-elevation-z4: none;
+  --jp-elevation-z6: var(--clean-shadow-float);
+  --jp-elevation-z8: var(--clean-shadow-float);
+  --jp-elevation-z12: var(--clean-shadow-float);
+  --jp-elevation-z16: var(--clean-shadow-float);
+  --jp-elevation-z20: var(--clean-shadow-float);
+  --jp-elevation-z24: var(--clean-shadow-float);
+
+  /* ---- Borders ---- */
+  --jp-border-width: 1px;
+  --jp-border-color0: var(--clean-border-strong);
+  --jp-border-color1: var(--clean-border);
+  --jp-border-color2: var(--clean-border);
+  --jp-border-color3: #eeece8;
+  --jp-inverse-border-color: var(--clean-text-3);
+  --jp-border-radius: var(--clean-radius-control);
+
+  /* ---- UI fonts ---- */
+  --jp-ui-font-scale-factor: 1.2;
+  --jp-ui-font-size0: 0.8333em;
+  --jp-ui-font-size1: 13px;
+  --jp-ui-font-size2: 1.2em;
+  --jp-ui-font-size3: 1.44em;
+  --jp-ui-font-family: var(--clean-font-ui);
+  --jp-ui-font-color0: #111;
+  --jp-ui-font-color1: var(--clean-text-1);
+  --jp-ui-font-color2: var(--clean-text-2);
+  --jp-ui-font-color3: var(--clean-text-3);
+  --jp-ui-inverse-font-color0: #fff;
+  --jp-ui-inverse-font-color1: #fff;
+  --jp-ui-inverse-font-color2: rgba(255, 255, 255, 0.75);
+  --jp-ui-inverse-font-color3: rgba(255, 255, 255, 0.55);
+
+  /* ---- Content fonts (markdown, rendered HTML) ---- */
+  --jp-content-line-height: 1.65;
+  --jp-content-font-scale-factor: 1.2;
+  --jp-content-font-size0: 0.8333em;
+  --jp-content-font-size1: 15px;
+  --jp-content-font-size2: 1.2em;
+  --jp-content-font-size3: 1.5em;
+  --jp-content-font-size4: 1.9em;
+  --jp-content-font-size5: 2.2em;
+  --jp-content-presentation-font-size1: 18px;
+  --jp-content-heading-line-height: 1.2;
+  --jp-content-heading-margin-top: 1.4em;
+  --jp-content-heading-margin-bottom: 0.5em;
+  --jp-content-heading-font-weight: 700;
+  --jp-content-font-color0: #111;
+  --jp-content-font-color1: var(--clean-text-1);
+  --jp-content-font-color2: var(--clean-text-2);
+  --jp-content-font-color3: var(--clean-text-3);
+  --jp-content-link-color: var(--clean-accent);
+  --jp-content-link-visited-color: var(--clean-accent-hover);
+  --jp-content-font-family: var(--clean-font-ui);
+
+  /* ---- Code fonts ---- */
+  --jp-code-font-size: 13px; /* JetBrains Mono runs larger than Source Code Pro */
+  --jp-code-line-height: 1.6;
+  --jp-code-padding: 6px;
+  --jp-code-font-family-default: var(--clean-font-code);
+  --jp-code-font-family: var(--clean-font-code);
+  --jp-code-presentation-font-size: 17px;
+  --jp-code-cursor-width0: 1.5px;
+  --jp-code-cursor-width1: 2px;
+  --jp-code-cursor-width2: 4px;
+
+  /* ---- Layout ---- */
+  --jp-layout-color0: var(--clean-canvas);
+  --jp-layout-color1: var(--clean-canvas);
+  --jp-layout-color2: var(--clean-surface);
+  --jp-layout-color3: var(--clean-surface-2);
+  --jp-layout-color4: var(--clean-border-strong);
+  --jp-inverse-layout-color0: #111;
+  --jp-inverse-layout-color1: var(--clean-text-1);
+  --jp-inverse-layout-color2: #3a3936;
+  --jp-inverse-layout-color3: var(--clean-text-2);
+  --jp-inverse-layout-color4: var(--clean-text-3);
+
+  /* ---- Brand / accent ---- */
+  --jp-brand-color0: var(--clean-accent-hover);
+  --jp-brand-color1: var(--clean-accent);
+  --jp-brand-color2: #5a8fd0;
+  --jp-brand-color3: var(--clean-accent-soft);
+  --jp-brand-color4: var(--clean-accent-subtle);
+  --jp-accent-color0: #246540;
+  --jp-accent-color1: var(--clean-success);
+  --jp-accent-color2: #7fb597;
+  --jp-accent-color3: var(--clean-success-subtle);
+
+  /* ---- State colors ---- */
+  --jp-warn-color0: #9a5f14;
+  --jp-warn-color1: var(--clean-warn);
+  --jp-warn-color2: #d9a65d;
+  --jp-warn-color3: var(--clean-warn-subtle);
+  --jp-error-color0: #a32e22;
+  --jp-error-color1: var(--clean-error);
+  --jp-error-color2: #e08a80;
+  --jp-error-color3: var(--clean-error-subtle);
+  --jp-success-color0: #246540;
+  --jp-success-color1: var(--clean-success);
+  --jp-success-color2: #7fb597;
+  --jp-success-color3: var(--clean-success-subtle);
+  --jp-info-color0: var(--clean-accent-hover);
+  --jp-info-color1: var(--clean-accent);
+  --jp-info-color2: var(--clean-accent-soft);
+  --jp-info-color3: var(--clean-accent-subtle);
+
+  /* Buttons: primary is near-black, reject is neutral, warn is error red */
+  --jp-accept-color-normal: var(--clean-text-1);
+  --jp-accept-color-hover: #333;
+  --jp-accept-color-active: #000;
+  --jp-reject-color-normal: var(--clean-text-2);
+  --jp-reject-color-hover: #58565a;
+  --jp-reject-color-active: #3a3936;
+  --jp-warn-color-normal: var(--clean-error);
+  --jp-warn-color-hover: #a32e22;
+  --jp-warn-color-active: #8a2419;
+
+  /* Focus ring */
+  --jp-focus-outline-color: var(--clean-accent);
+  --jp-focus-outline-width: 2px;
+
+  /* ---- Cells ---- */
+  --jp-cell-padding: 0;
+  --jp-cell-collapser-width: 0;
+  --jp-cell-collapser-min-height: 20px;
+  --jp-cell-collapser-not-active-hover-opacity: 0.6;
+  --jp-cell-editor-background: var(--clean-code-bg);
+  --jp-cell-editor-border-color: transparent;
+  --jp-cell-editor-box-shadow: none;
+  --jp-cell-editor-active-background: var(--clean-canvas);
+  --jp-cell-editor-active-border-color: var(--clean-accent);
+  --jp-cell-prompt-width: 64px;
+  --jp-cell-prompt-font-family: var(--clean-font-code);
+  --jp-cell-prompt-letter-spacing: var(--clean-label-tracking);
+  --jp-cell-prompt-opacity: 1;
+  --jp-cell-prompt-not-active-opacity: 1;
+  --jp-cell-prompt-not-active-font-color: var(--clean-text-3);
+  --jp-cell-inprompt-font-color: var(--clean-text-2);
+  --jp-cell-outprompt-font-color: var(--clean-text-3);
+
+  /* ---- Notebook ---- */
+  --jp-notebook-padding: 32px;
+  --jp-notebook-select-background: var(--clean-canvas);
+  --jp-notebook-multiselected-color: var(--clean-accent-subtle);
+  --jp-notebook-scroll-padding: calc(
+    100% - var(--jp-code-font-size) * var(--jp-code-line-height) -
+      var(--jp-code-padding) - var(--jp-cell-padding) - 1px
+  );
+  --jp-editor-scroll-padding: calc(
+    100% - var(--jp-code-font-size) * var(--jp-code-line-height) -
+      var(--jp-code-padding) - 1px
+  );
+
+  /* ---- Rendermime ---- */
+  --jp-rendermime-error-background: var(--clean-warn-subtle);
+  --jp-rendermime-table-row-background: var(--clean-canvas);
+  --jp-rendermime-table-row-hover-background: var(--clean-surface);
+
+  /* ---- Dialogs, console, toolbar, status bar ---- */
+  --jp-dialog-background: rgba(0, 0, 0, 0.25);
+  --jp-console-padding: 10px;
+  --jp-toolbar-border-color: var(--clean-border);
+  --jp-toolbar-micro-height: 8px;
+  --jp-toolbar-background: var(--clean-canvas);
+  --jp-toolbar-box-shadow: none;
+  --jp-toolbar-header-margin: 4px 4px 0 4px;
+  --jp-toolbar-active-background: var(--clean-surface-2);
+  --jp-statusbar-height: 24px;
+
+  /* ---- Inputs ---- */
+  --jp-input-box-shadow: none;
+  --jp-input-active-box-shadow-color: transparent;
+  --jp-input-active-background: var(--clean-canvas);
+  --jp-input-hover-background: var(--clean-canvas);
+  --jp-input-background: var(--clean-canvas);
+  --jp-input-border-color: var(--clean-border-strong);
+  --jp-input-active-border-color: var(--clean-accent);
+
+  /* ---- Editor ---- */
+  --jp-editor-selected-background: var(--clean-accent-subtle);
+  --jp-editor-selected-focused-background: var(--clean-editor-selection);
+  --jp-editor-cursor-color: var(--clean-text-1);
+
+  /* ---- Syntax: five hues with one role each ----
+   * blue    keywords (and True/False, which core styles as keywords)
+   * green   strings (including f-string literal text, tagged string-2)
+   * orange  numbers, decorators
+   * violet  callables: function/class definitions and builtins
+   * pink    IPython magics (%name, %%name)
+   * greys   comments, operators (including `@` and `*`), punctuation;
+   *         names stay in the text colour
+   * Magics share the operator tag with modulo `%`, so src/syntax.ts marks
+   * them with a class that style/codemirror.css colours
+   * (`--clean-syntax-pink`).
+   */
+  --jp-mirror-editor-keyword-color: var(--clean-accent);
+  --jp-mirror-editor-atom-color: var(--clean-syntax-orange);
+  --jp-mirror-editor-number-color: var(--clean-syntax-orange);
+  --jp-mirror-editor-def-color: var(--clean-syntax-violet);
+  --jp-mirror-editor-variable-color: var(--clean-text-1);
+  --jp-mirror-editor-variable-2-color: var(--clean-text-2);
+  --jp-mirror-editor-variable-3-color: var(--clean-text-1);
+  --jp-mirror-editor-punctuation-color: var(--clean-text-2);
+  --jp-mirror-editor-property-color: var(--clean-text-1);
+  --jp-mirror-editor-operator-color: var(--clean-text-2);
+  --jp-mirror-editor-comment-color: var(--clean-text-3);
+  --jp-mirror-editor-string-color: var(--clean-success);
+  --jp-mirror-editor-string-2-color: var(--clean-success);
+  --jp-mirror-editor-meta-color: var(--clean-syntax-orange);
+  --jp-mirror-editor-qualifier-color: var(--clean-text-2);
+  --jp-mirror-editor-builtin-color: var(--clean-syntax-violet);
+  --jp-mirror-editor-bracket-color: var(--clean-text-2);
+  --jp-mirror-editor-tag-color: var(--clean-success);
+  --jp-mirror-editor-attribute-color: var(--clean-accent);
+  --jp-mirror-editor-header-color: var(--clean-text-1);
+  --jp-mirror-editor-quote-color: var(--clean-text-2);
+  --jp-mirror-editor-link-color: var(--clean-accent);
+  --jp-mirror-editor-error-color: var(--clean-error);
+  --jp-mirror-editor-hr-color: var(--clean-border-strong);
+
+  /* ---- Collaborators ---- */
+  --jp-collaborator-color1: #ad4a00;
+  --jp-collaborator-color2: #7b6a00;
+  --jp-collaborator-color3: #007e00;
+  --jp-collaborator-color4: #008772;
+  --jp-collaborator-color5: #0079b9;
+  --jp-collaborator-color6: #8b45c6;
+  --jp-collaborator-color7: #be208b;
+
+  /* ---- Icons: one grey, no colored file-type icons ---- */
+  --jp-jupyter-icon-color: var(--clean-text-2);
+  --jp-notebook-icon-color: var(--clean-text-2);
+  --jp-json-icon-color: var(--clean-text-2);
+  --jp-console-icon-background-color: var(--clean-surface-2);
+  --jp-console-icon-color: var(--clean-text-2);
+  --jp-terminal-icon-background-color: var(--clean-surface-2);
+  --jp-terminal-icon-color: var(--clean-text-2);
+  --jp-text-editor-icon-color: var(--clean-text-2);
+  --jp-inspector-icon-color: var(--clean-text-2);
+  --jp-switch-color: var(--clean-border-strong);
+  --jp-switch-true-position-color: var(--clean-accent);
+  --jp-switch-cursor-color: rgba(0, 0, 0, 0.8);
+  --jp-icon-contrast-color0: #7a5ea3;
+  --jp-icon-contrast-color1: var(--clean-success);
+  --jp-icon-contrast-color2: #b2457a;
+  --jp-icon-contrast-color3: var(--clean-accent);
+
+  /* ---- Search, shortcuts, datagrid, vega, sidebar ---- */
+  --jp-search-selected-match-background-color: var(--clean-warn-subtle);
+  --jp-search-selected-match-color: var(--clean-text-1);
+  --jp-search-unselected-match-background-color: var(--clean-surface-2);
+  --jp-search-unselected-match-color: var(--clean-text-1);
+  --jp-shortcuts-button-background: var(--clean-surface-2);
+  --jp-shortcuts-button-hover-background: var(--clean-border);
+  --jp-datagrid-font-family: var(--clean-font-code);
+  --jp-datagrid-font-size: 12px;
+  --jp-vega-background: var(--clean-canvas);
+  --jp-sidebar-min-width: 200px;
+
+  /* ---- Scrollbars (used when "theme scrollbars" is enabled) ---- */
+  --jp-scrollbar-background-color: var(--clean-canvas);
+  --jp-scrollbar-thumb-color: 211, 208, 202; /* --clean-border-strong as rgb */
+  --jp-scrollbar-endpad: 2px;
+  --jp-scrollbar-thumb-margin: 3px;
+  --jp-scrollbar-thumb-radius: 9px;
+
+  /* ---- Private layout metrics (core defines these; later source order wins) ---- */
+  --jp-private-menubar-height: 32px;
+  --jp-private-menu-panel-height: 32px;
+  --jp-private-horizontal-tab-height: 32px;
+  --jp-private-horizontal-tab-width: 200px;
+  --jp-private-sidebar-tab-width: 36px;
+  --jp-private-dock-panel-padding: 0;
+  --jp-private-menu-item-height: 26px;
+}
+
+/* Completer type badges: keep them flat. */
+.jp-Completer {
+  --jp-completer-type-background0: transparent;
+  --jp-completer-type-background1: var(--clean-accent-subtle);
+  --jp-completer-type-background2: var(--clean-success-subtle);
+  --jp-completer-type-background3: var(--clean-warn-subtle);
+  --jp-completer-type-background4: var(--clean-error-subtle);
+  --jp-completer-type-background5: var(--clean-surface-2);
+  --jp-completer-type-background6: var(--clean-accent-subtle);
+  --jp-completer-type-background7: var(--clean-success-subtle);
+  --jp-completer-type-background8: var(--clean-warn-subtle);
+  --jp-completer-type-background9: var(--clean-error-subtle);
+  --jp-completer-type-background10: var(--clean-surface-2);
+}

@@ -1,0 +1,42 @@
+/* Bundled typefaces. Lato (UI, content) and JetBrains Mono (code). Both SIL OFL 1.1;
+   license texts in third-party-licenses/. */
+
+@font-face {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/Lato-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Lato;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/Lato-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/Lato-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('./fonts/JetBrainsMono-Variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: italic;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('./fonts/JetBrainsMono-Italic-Variable.woff2') format('woff2');
+}

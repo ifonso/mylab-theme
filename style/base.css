@@ -1,0 +1,40 @@
+/* Global resets: typography smoothing, selection, scrollbars, focus. */
+
+body,
+.jp-ThemedContainer {
+  font-family: var(--jp-ui-font-family);
+  color: var(--jp-ui-font-color1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.jp-ThemedContainer ::selection {
+  background: var(--clean-editor-selection);
+}
+
+/* Thin scrollbars everywhere (applies when "Theme Scrollbars" is on). */
+[data-jp-theme-scrollbars='true'] * {
+  scrollbar-width: thin;
+}
+
+[data-jp-theme-scrollbars='true'] *::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-jp-theme-scrollbars='true'] *::-webkit-scrollbar-thumb {
+  background: rgb(var(--jp-scrollbar-thumb-color));
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: var(--jp-scrollbar-thumb-radius);
+}
+
+[data-jp-theme-scrollbars='true'] *::-webkit-scrollbar-track,
+[data-jp-theme-scrollbars='true'] *::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Keyboard focus: one consistent ring, no glow. */
+.jp-ThemedContainer :focus-visible {
+  outline-color: var(--jp-focus-outline-color);
+}

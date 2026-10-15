@@ -1,0 +1,88 @@
+/*
+ * Icons, phase 1: native JupyterLab SVGs, one grey, 16px in chrome.
+ * Phase 2 (later) swaps the SVG set through LabIcon in src/index.ts.
+ */
+
+/* Default tone: everything that is a "selectable" or layout icon is text-2 */
+.jp-ThemedContainer .jp-icon3[fill],
+.jp-ThemedContainer .jp-icon-selectable[fill] {
+  fill: var(--jp-inverse-layout-color3);
+}
+
+.jp-ThemedContainer .jp-icon3[stroke],
+.jp-ThemedContainer .jp-icon-selectable[stroke] {
+  stroke: var(--jp-inverse-layout-color3);
+}
+
+/* Brand / warn tinted icons (Jupyter logo, kernel icons) become grey too */
+.jp-ThemedContainer .jp-icon-brand0[fill],
+.jp-ThemedContainer .jp-icon-brand1[fill],
+.jp-ThemedContainer .jp-icon-brand2[fill],
+.jp-ThemedContainer .jp-icon-warn0[fill],
+.jp-ThemedContainer .jp-icon-warn1[fill],
+.jp-ThemedContainer .jp-icon-warn2[fill] {
+  fill: var(--jp-inverse-layout-color3);
+}
+
+/* Hovering a toolbar or sidebar button darkens the icon */
+.jp-ToolbarButtonComponent:hover .jp-icon3[fill],
+.jp-ToolbarButtonComponent:hover .jp-icon-selectable[fill],
+.jp-Button:hover .jp-icon3[fill] {
+  fill: var(--jp-ui-font-color1);
+}
+
+/* Toolbar icons: 16px */
+.jp-Toolbar .jp-ToolbarButtonComponent-icon svg,
+.jp-Toolbar .jp-ToolbarButtonComponent svg,
+.jp-Toolbar-kernelStatus svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Main-area tab icons */
+.lm-DockPanel-tabBar .lm-TabBar-tabIcon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Close icon on tabs */
+.lm-TabBar-tabCloseIcon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Jupyter logo in the top-left corner */
+#jp-MainLogo svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Kernel status circle in the toolbar: a small ring, not a big icon */
+.jp-Toolbar-kernelStatus .jp-icon-selectable-inverse[fill] {
+  fill: var(--jp-layout-color1);
+}
+
+/* Launcher and file browser keep the same single tone for file-type icons */
+.jp-LauncherCard-icon .jp-icon-selectable[fill],
+.jp-DirListing-itemIcon .jp-icon-selectable[fill] {
+  fill: var(--jp-inverse-layout-color3);
+}
+
+/* Folder icons a touch lighter so file names lead */
+.jp-DirListing-itemIcon .jp-icon-selectable[fill].jp-icon-folder,
+.jp-FolderIcon .jp-icon3[fill] {
+  fill: var(--jp-inverse-layout-color4);
+}
+
+/* Running-indicator dot next to open notebooks */
+.jp-DirListing-item.jp-mod-running .jp-DirListing-itemIcon::before {
+  color: var(--clean-success);
+  font-size: 10px;
+}
+
+/* Sort caret in the file browser column headers: small, like a text glyph */
+.jp-DirListing-headerItem .jp-DirListing-headerItemIcon svg,
+.jp-DirListing-headerItem svg {
+  width: 12px;
+  height: 12px;
+}
