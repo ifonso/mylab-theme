@@ -68,16 +68,5 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "mylab_theme/labextension"
 
-[tool.jupyter-releaser.options]
-version_cmd = "hatch version"
-
-[tool.jupyter-releaser.hooks]
-before-build-npm = [
-    "python -m pip install 'jupyter-builder>=1.2.0,<2'",
-    "jlpm",
-    "jlpm build:prod"
-]
-before-build-python = ["jlpm clean:all"]
-
 [tool.check-wheel-contents]
 ignore = ["W002"]
