@@ -36,6 +36,6 @@ The theme bundles third-party assets under their own licenses, included in [`thi
 
 | Asset                                                | Used for                    | License                                                                                                                     |
 | ---------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [Lato](https://www.latofonts.com)                    | interface and markdown text | [SIL Open Font License 1.1](https://github.com/ifonso/mylab-theme/blob/main/third-party-licenses/Lato-OFL-1.1.txt)          |
+| [Lato](https://fonts.google.com/specimen/Lato)       | interface and markdown text | [SIL Open Font License 1.1](https://github.com/ifonso/mylab-theme/blob/main/third-party-licenses/Lato-OFL-1.1.txt)          |
 | [JetBrains Mono](https://www.jetbrains.com/lp/mono/) | code                        | [SIL Open Font License 1.1](https://github.com/ifonso/mylab-theme/blob/main/third-party-licenses/JetBrainsMono-OFL-1.1.txt) |
 | [Phosphor Icons](https://phosphoricons.com)          | interface icons             | [MIT](https://github.com/ifonso/mylab-theme/blob/main/third-party-licenses/PhosphorIcons-MIT.txt)                           |
