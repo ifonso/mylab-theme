@@ -11,6 +11,6 @@ kind: theme
 labextension_name: mylab-theme
 project_short_description: A JupyterLab minimalist theme based on RStudio and Datalore.
 python_name: mylab_theme
-repository: https://github.com/ifonso/clean-jupyter
+repository: https://github.com/ifonso/mylab-theme
 test: false
 

@@ -7,9 +7,9 @@
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://github.com/ifonso/clean-jupyter",
+    "homepage": "https://github.com/ifonso/mylab-theme",
     "bugs": {
-        "url": "https://github.com/ifonso/clean-jupyter/issues"
+        "url": "https://github.com/ifonso/mylab-theme/issues"
     },
     "license": "BSD-3-Clause",
     "author": {
@@ -26,7 +26,7 @@
     "types": "lib/index.d.ts",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ifonso/clean-jupyter.git"
+        "url": "https://github.com/ifonso/mylab-theme.git"
     },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
